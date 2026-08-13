@@ -1,31 +1,31 @@
 # eLearning Platform
 
-O platformă web de tip Learning Management System (LMS), construită pentru publicarea și parcurgerea cursurilor online, evaluare prin teste interactive și colaborare prin forum.
+A Learning Management System (LMS) web platform built for publishing and taking online courses, interactive test-based assessment, and collaboration through forums.
 
-Acest proiect evidențiază un stack full‑stack modern (Laravel + Vue), un model clar de business (roluri, cursuri, progres, evaluare) și o arhitectură care poate fi extinsă pentru produse edtech reale.
+This project showcases a modern full-stack setup (Laravel + Vue), a clear business model (roles, courses, progress, assessment), and an architecture that can be extended into real edtech products.
 
-## Ce face proiectul
+## What the project does
 
-- gestionare cursuri (creare, editare, publicare)
-- lecții asociate cursurilor, inclusiv suport pentru video
-- teste și exerciții cu mai multe tipuri de întrebări:
+- course management (create, edit, publish)
+- lessons linked to courses, including video support
+- tests and exercises with multiple question types:
   - multiple choice (single / multiple answers)
   - ordering
   - fill in the blanks
   - numeric
-- urmărirea progresului utilizatorilor și punctaj
-- înscriere/renunțare la cursuri
-- forumuri și topicuri pentru discuții
-- sistem de roluri (admin / teacher / user) și cereri de rol
-- secțiune de probleme/exerciții suplimentare
+- user progress and score tracking
+- enroll/unenroll in courses
+- forums and topics for discussion
+- role system (admin / teacher / user) and role requests
+- additional problems/exercises section
 
-## Tehnologii folosite
+## Technologies used
 
 ### Backend
 - **PHP 8.1+ / 8.2 (Docker)**
 - **Laravel 10**
 - **Eloquent ORM**
-- **Laravel Sanctum** (endpoint API protejat pentru user)
+- **Laravel Sanctum** (protected API endpoint for users)
 - **MySQL**
 
 ### Frontend
@@ -36,55 +36,55 @@ Acest proiect evidențiază un stack full‑stack modern (Laravel + Vue), un mod
 - **Axios / Fetch API**
 
 ### Tooling & DevOps
-- **Laravel Mix / Webpack** pentru build assets
+- **Laravel Mix / Webpack** for asset builds
 - **Docker + Docker Compose** (app, nginx, mysql, phpMyAdmin)
-- **PHPUnit** pentru testare
-- **Prettier** și **PHP CS Fixer** pentru formatare
+- **PHPUnit** for testing
+- **Prettier** and **PHP CS Fixer** for formatting
 
-## Arhitectură (high-level)
+## Architecture (high-level)
 
-Aplicația urmează modelul **MVC** din Laravel, cu frontend hibrid:
-- **Blade templates** pentru layout și pagini server-rendered
-- **Vue components** montate în aplicație pentru UI interactiv
+The application follows Laravel's **MVC** model, with a hybrid frontend:
+- **Blade templates** for layout and server-rendered pages
+- **Vue components** mounted in the app for interactive UI
 
-Flux general:
-1. Route-urile din `routes/web.php` trimit requesturile către controllere
-2. Controllerele gestionează logica de business și relațiile dintre modele
-3. Modelele Eloquent mapează entitățile din baza de date
-4. Blade + Vue afișează datele și gestionează interacțiunile clientului
+General flow:
+1. Routes in `routes/web.php` send requests to controllers
+2. Controllers manage business logic and model relationships
+3. Eloquent models map database entities
+4. Blade + Vue display data and handle client-side interactions
 
-### Module principale
+### Main modules
 - `CourseController`, `LessonController`, `TestController`, `ExerciseController`
 - `ForumController`, `ForumTopicController`, `ForumPostController`
 - `RoleRequestController`, `UserController`, `ProblemController`
 
-### Entități cheie
+### Key entities
 - `User`, `Role`, `RoleRequest`
 - `Course`, `Lesson`, `Test`, `Exercise`
 - `Forum`, `ForumTopic`, `ForumPost`
 - `UserActivity`, `Category`, `CourseMetaTag`, `Problem`
 
-## Structură proiect
+## Project structure
 
 ```text
 app/
-  Http/Controllers/    # logica HTTP și business pe module
-  Models/              # modele Eloquent și relații
+  Http/Controllers/    # HTTP and module business logic
+  Models/              # Eloquent models and relationships
 resources/
-  js/                  # componente Vue + store Vuex
-  views/               # pagini Blade
+  js/                  # Vue components + Vuex store
+  views/               # Blade pages
 routes/
-  web.php              # rute principale ale aplicației
-  api.php              # rute API
-config/                # configurări Laravel
+  web.php              # main application routes
+  api.php              # API routes
+config/                # Laravel configuration
 database/
-  migrations/          # schema bazei de date
+  migrations/          # database schema
   seeders/             # seeders
 ```
 
-## Instalare și rulare
+## Installation and running
 
-### Varianta Docker (recomandat)
+### Docker setup (recommended)
 
 ```bash
 git clone <repo-url>
@@ -93,7 +93,7 @@ cp .env.example .env
 docker compose up -d --build
 ```
 
-Apoi, în containerul PHP:
+Then, in the PHP container:
 
 ```bash
 composer install
@@ -102,7 +102,7 @@ php artisan migrate
 php artisan storage:link
 ```
 
-### Varianta locală
+### Local setup
 
 Prerequisites:
 - PHP 8.1+
@@ -121,7 +121,7 @@ npm run dev
 php artisan serve
 ```
 
-## Comenzi utile
+## Useful commands
 
 ```bash
 # frontend build (dev)
@@ -130,38 +130,38 @@ npm run dev
 # frontend build (production)
 npm run build
 
-# rulare teste
+# run tests
 php artisan test
 
-# formatare JS/Vue/CSS/Blade
+# format JS/Vue/CSS/Blade
 npm run prettier
 
-# formatare PHP
+# format PHP
 npm run php-format
-# sau
+# or
 composer format
 ```
 
-## Roluri și scenarii de utilizare
+## Roles and usage scenarios
 
-- **Learner**: se înscrie la cursuri, parcurge lecții, susține teste, urmărește progresul
-- **Teacher**: creează cursuri, lecții și evaluări, gestionează conținut educațional
-- **Admin**: aprobă cereri de rol și supervizează platforma
+- **Learner**: enrolls in courses, completes lessons, takes tests, tracks progress
+- **Teacher**: creates courses, lessons, and assessments; manages educational content
+- **Admin**: approves role requests and oversees the platform
 
-## Notă pentru deployment
+## Deployment note
 
-Fișierul `docker-compose.yml` este orientat spre dezvoltare locală. Pentru producție:
-- mută credențialele în variabile de mediu sigure
-- setează parole puternice și separate
-- configurează HTTPS, backup și monitorizare
+The `docker-compose.yml` file is oriented toward local development. For production:
+- move credentials to secure environment variables
+- set strong, separate passwords
+- configure HTTPS, backups, and monitoring
 
-## Status proiect
+## Project status
 
-Proiect funcțional pentru demo/portofoliu, potrivit pentru:
-- prezentare tehnică la recrutare
-- extindere cu funcționalități avansate (gamification, analytics, microservices)
-- bază pentru MVP în zona EdTech
+A functional demo/portfolio project, suitable for:
+- technical showcase for recruiting
+- extension with advanced features (gamification, analytics, microservices)
+- an MVP base in the EdTech space
 
-## Licență
+## License
 
-Acest repository folosește licența MIT (conform proiectului Laravel).
+This repository uses the MIT license (as in the Laravel project).
